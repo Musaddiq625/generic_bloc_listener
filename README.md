@@ -43,7 +43,7 @@ import 'package:generic_bloc_listener/generic_bloc_listener.dart';
 2. Use the `GenericBlocListener` widget:
 
 ```dart
-GenericBlocListener<YourBloc, YourState, LoadingState, SuccessState, ErrorState>(
+GenericBlocListener<ExampleBloc, ExampleState, LoadingState, SuccessState, ErrorState>(
   onState: (state) {
     // Handle state changes
   },
@@ -54,20 +54,20 @@ GenericBlocListener<YourBloc, YourState, LoadingState, SuccessState, ErrorState>
   onError: (state) => state.errorMessage, // Extract error message from state
   // OR use a custom error message:
   // onError: (_) => 'Something went wrong. Please try again.',
-  toastWidget: YourCustomToastWidget(), // Optional custom toast widget
-  child: YourChildWidget(),
+  toastWidget: CustomToastWidget(), // Optional custom toast widget
+  builder: (state) => ContentWidget(state: state),
 )
 ```
 
 ## Example
 
 ```dart
-class MyPage extends StatelessWidget {
+class ExamplePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => MyBloc(),
-      child: GenericBlocListener<MyBloc, MyState, LoadingState, SuccessState, ErrorState>(
+      create: (context) => ExampleBloc(),
+      child: GenericBlocListener<ExampleBloc, ExampleState, LoadingState, SuccessState, ErrorState>(
         onSuccess: (context, state) {
           // Handle success
           ScaffoldMessenger.of(context).showSnackBar(
@@ -75,7 +75,7 @@ class MyPage extends StatelessWidget {
           );
         },
         onError: (state) => state.errorMessage,
-        child: MyContentWidget(),
+        builder: (state) => ContentWidget(state: state),
       ),
     );
   }
@@ -114,22 +114,22 @@ Error toasts will only be shown if the `onError` callback is provided. If `onErr
 
 ```dart
 // Without onError (warning will be logged)
-GenericBlocListener<MyBloc, MyState, LoadingState, SuccessState, ErrorState>(
+GenericBlocListener<ExampleBloc, ExampleState, LoadingState, SuccessState, ErrorState>(
   // onError not provided - warning will be logged
-  child: MyWidget(),
+  builder: (state) => const SizedBox(),
 );
 
 // With onError (toast will be shown)
-GenericBlocListener<MyBloc, MyState, LoadingState, SuccessState, ErrorState>(
+GenericBlocListener<ExampleBloc, ExampleState, LoadingState, SuccessState, ErrorState>(
   // Using state error message
   onError: (state) => state.errorMessage,
-  child: MyWidget(),
+  builder: (state) => const SizedBox(),
 );
 
 // With custom error message
-GenericBlocListener<MyBloc, MyState, LoadingState, SuccessState, ErrorState>(
+GenericBlocListener<ExampleBloc, ExampleState, LoadingState, SuccessState, ErrorState>(
   onError: (_) => 'An error occurred. Please try again later.',
-  child: MyWidget(),
+  child: YourWidget(),
 );
 ```
 

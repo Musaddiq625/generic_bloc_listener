@@ -47,7 +47,7 @@ void main() {
             LoadingState,
             SuccessState,
             ErrorState
-          >(child: SizedBox(key: testKey)),
+          >(builder: (state) => const SizedBox(key: testKey)),
         ),
       ),
     );
@@ -68,7 +68,10 @@ void main() {
             LoadingState,
             SuccessState,
             ErrorState
-          >(onState: (state) => stateCalled = true, child: const SizedBox()),
+          >(
+            onState: (state) => stateCalled = true,
+            builder: (state) => const SizedBox(),
+          ),
         ),
       ),
     );
@@ -90,7 +93,7 @@ void main() {
             LoadingState,
             SuccessState,
             ErrorState
-          >(child: SizedBox()),
+          >(builder: (state) => const SizedBox()),
         ),
       ),
     );
@@ -120,7 +123,7 @@ void main() {
             onSuccess: (context, state) {
               successCalled = true;
             },
-            child: const SizedBox(),
+            builder: (state) => const SizedBox(),
           ),
         ),
       ),
@@ -160,7 +163,7 @@ void main() {
               errorCallbackCalled = true;
               return state.error;
             },
-            child: const SizedBox(),
+            builder: (state) => const SizedBox(),
           ),
         ),
       ),
@@ -205,7 +208,7 @@ void main() {
               errorCallbackCalled = true;
               return customErrorMessage;
             },
-            child: const SizedBox(),
+            builder: (state) => const SizedBox(),
           ),
         ),
       ),
@@ -240,7 +243,7 @@ void main() {
         LoadingState,
         LoadingState,
         ErrorState
-      >(child: const SizedBox()),
+      >(builder: (state) => const SizedBox()),
       throwsA(
         isA<AssertionError>().having(
           (e) => e.toString(),
@@ -269,7 +272,7 @@ void main() {
               LoadingState,
               SuccessState,
               ErrorState
-            >(child: SizedBox()),
+            >(builder: (state) => const SizedBox()),
           ),
         ),
       );

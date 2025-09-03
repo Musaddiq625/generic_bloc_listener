@@ -9,7 +9,7 @@ import 'ui/app_toast.dart';
 class GenericBlocListener<B extends StateStreamable<S>, S, L, Su, F>
     extends StatelessWidget {
   /// The child widget to display.
-  final Widget child;
+  final Widget Function(S state) builder;
 
   /// Callback function called when a state is emitted.
   final OnState<S>? onState;
@@ -24,13 +24,16 @@ class GenericBlocListener<B extends StateStreamable<S>, S, L, Su, F>
   final Widget? toastWidget;
 
   const GenericBlocListener({
-    required this.child,
+    required this.builder,
     super.key,
     this.onState,
     this.onSuccess,
     this.onError,
     this.toastWidget,
-  }) : assert(!(L == Su || L == F || Su == F), 'The type parameters L, Su, and F must be distinct types');
+  }) : assert(
+         !(L == Su || L == F || Su == F),
+         'The type parameters L, Su, and F must be distinct types',
+       );
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +42,7 @@ class GenericBlocListener<B extends StateStreamable<S>, S, L, Su, F>
         onState?.call(state);
         _handleState(context, state);
       },
-      builder: (context, state) => child,
+      builder: (context, state) => builder(state),
     );
   }
 
