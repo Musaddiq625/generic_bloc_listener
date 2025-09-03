@@ -41,7 +41,7 @@ void main() {
       MaterialApp(
         home: BlocProvider.value(
           value: bloc,
-          child: const GenericBlocListener<
+          child: GenericBlocListener<
             MockBloc,
             TestState,
             LoadingState,
@@ -84,7 +84,7 @@ void main() {
       MaterialApp(
         home: BlocProvider.value(
           value: bloc,
-          child: const GenericBlocListener<
+          child: GenericBlocListener<
             MockBloc,
             TestState,
             LoadingState,
@@ -119,7 +119,6 @@ void main() {
           >(
             onSuccess: (context, state) {
               successCalled = true;
-              return Future.value();
             },
             child: const SizedBox(),
           ),
@@ -232,6 +231,26 @@ void main() {
     await tester.pump(const Duration(seconds: 3));
   });
 
+  test('throws when type parameters are not distinct', () {
+    // Test with L and Su being the same type
+    expect(
+      () => GenericBlocListener<
+        MockBloc,
+        TestState,
+        LoadingState,
+        LoadingState,
+        ErrorState
+      >(child: const SizedBox()),
+      throwsA(
+        isA<AssertionError>().having(
+          (e) => e.toString(),
+          'error message',
+          contains('The type parameters L, Su, and F must be distinct types'),
+        ),
+      ),
+    );
+  });
+
   testWidgets('logs warning when onError is not provided', (tester) async {
     final logMessages = <String>[];
     final originalDebugPrint = debugPrint;
@@ -244,7 +263,7 @@ void main() {
         MaterialApp(
           home: BlocProvider.value(
             value: bloc,
-            child: const GenericBlocListener<
+            child: GenericBlocListener<
               MockBloc,
               TestState,
               LoadingState,

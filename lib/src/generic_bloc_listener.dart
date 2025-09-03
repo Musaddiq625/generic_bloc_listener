@@ -30,7 +30,7 @@ class GenericBlocListener<B extends StateStreamable<S>, S, L, Su, F>
     this.onSuccess,
     this.onError,
     this.toastWidget,
-  });
+  }) : assert(!(L == Su || L == F || Su == F), 'The type parameters L, Su, and F must be distinct types');
 
   @override
   Widget build(BuildContext context) {
@@ -44,19 +44,21 @@ class GenericBlocListener<B extends StateStreamable<S>, S, L, Su, F>
   }
 
   /// Handles the state emitted by the bloc.
-  Future<void> _handleState(BuildContext context, S state) async {
+  void _handleState(BuildContext context, S state) {
     if (state is L) {
       // Show a loader when the state is of type L.
       AppLoader.show(context);
     } else if (state is Su) {
       // Hide the loader when the state is of type Su and perform onSuccess action.
       AppLoader.hide(context);
-      await onSuccess?.call(context, state);
+      onSuccess?.call(context, state);
     } else if (state is F) {
       // Hide the loader when the state is of type F and display a toast with the error message.
       AppLoader.hide(context);
       if (onError == null) {
-        debugPrint('GenericBlocListener: ⚠️ Implement onError function to show toast');
+        debugPrint(
+          'GenericBlocListener: ⚠️ Implement onError function to show toast',
+        );
       } else {
         final message = onError!(state);
         AppToast.show(context, message, child: toastWidget);

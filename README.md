@@ -5,6 +5,7 @@ A Flutter package that provides a flexible BLoC listener widget with built-in st
 ## Features
 
 - 🎯 Generic BLoC listener that works with any state type
+- 🔒 Type safety with compile-time validation of distinct state types
 - 🔄 Built-in state listener for custom state handling
 - ⏳ Automatic loading state handling with circular progress indicator
 - ✅ Success state callback with context and state access
@@ -19,6 +20,17 @@ Add this to your `pubspec.yaml`:
 dependencies:
   generic_bloc_listener: <latest-version>
 ```
+
+## Type Parameters
+
+The `GenericBlocListener` requires five type parameters:
+- `B`: Your BLoC/Cubit type
+- `S`: The base state type that your BLOC emits
+- `L`: The loading state type
+- `Su`: The success state type
+- `F`: The failure/error state type
+
+All state types (L, Su, F) must be distinct from each other.
 
 ## Usage
 
@@ -35,7 +47,7 @@ GenericBlocListener<YourBloc, YourState, LoadingState, SuccessState, ErrorState>
   onState: (state) {
     // Handle state changes
   },
-  onSuccess: (context, state) async {
+  onSuccess: (context, state) {
     // Handle success state
   },
   // Required: Implement onError to show error toasts
