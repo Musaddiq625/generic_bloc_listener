@@ -1,6 +1,6 @@
 name: generic_bloc_listener
 description: Generic BLoC listener widget with built-in state handling.
-version: 1.0.1
+version: 1.0.2
 homepage: https://github.com/Musaddiq625/generic_bloc_listener
 repository: https://github.com/Musaddiq625/generic_bloc_listener.git
 issue_tracker: https://github.com/Musaddiq625/generic_bloc_listener/issues
