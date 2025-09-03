@@ -1,0 +1,20 @@
+name: generic_bloc_listener
+description: Generic BLoC listener widget with built-in state handling.
+version: 1.0.0
+homepage: https://github.com/Musaddiq625/generic_bloc_listener
+repository: https://github.com/Musaddiq625/generic_bloc_listener.git
+issue_tracker: https://github.com/Musaddiq625/generic_bloc_listener/issues
+
+environment:
+  sdk: ^3.7.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^9.1.1
+  fluttertoast: ^8.2.12
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
