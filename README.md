@@ -44,8 +44,9 @@ import 'package:generic_bloc_listener/generic_bloc_listener.dart';
 
 ```dart
 GenericBlocListener<ExampleBloc, ExampleState, LoadingState, SuccessState, ErrorState>(
-  onState: (state) {
+  onState: (context, state) {
     // Handle state changes
+    // Access context for navigation, showing dialogs, etc.
   },
   onSuccess: (context, state) {
     // Handle success state
@@ -55,7 +56,7 @@ GenericBlocListener<ExampleBloc, ExampleState, LoadingState, SuccessState, Error
   // OR use a custom error message:
   // onError: (_) => 'Something went wrong. Please try again.',
   toastWidget: CustomToastWidget(), // Optional custom toast widget
-  builder: (state) => ContentWidget(state: state),
+  builder: (context, state) => ContentWidget(state: state),
 )
 ```
 
@@ -75,7 +76,7 @@ class ExamplePage extends StatelessWidget {
           );
         },
         onError: (state) => state.errorMessage,
-        builder: (state) => ContentWidget(state: state),
+        builder: (context, state) => ContentWidget(state: state),
       ),
     );
   }

@@ -1,3 +1,8 @@
+## 1.0.3
+* Added `BuildContext` parameter to `onState` and `builder` callbacks
+* Updated all examples and tests to use the new callback signatures
+* Improved documentation to reflect API changes
+
 ## 1.0.2
 * Replaced `child` parameter with `builder` for more flexible widget building
 * Added state parameter to builder function for dynamic widget building

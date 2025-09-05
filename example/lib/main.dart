@@ -74,7 +74,7 @@ class ExamplePage extends StatelessWidget {
             // The GenericBlocListener wraps our content
             GenericBlocListener<ExampleCubit, ExampleState, ExampleLoading,
                     ExampleSuccess, ExampleError>(
-                onState: (state) {
+                onState: (context, state) {
                   debugPrint('State changed: $state');
                 },
                 onSuccess: (context, state) {
@@ -104,9 +104,9 @@ class ExamplePage extends StatelessWidget {
                     ],
                   ),
                 ),
-                builder: (state) {
+                builder: (context, state) {
                   return Column(
-                    spacing: 10,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       if (state is ExampleInitial)
                         const Text('Press the button to load data')
@@ -115,7 +115,7 @@ class ExamplePage extends StatelessWidget {
                       else if (state is ExampleSuccess)
                         Text(
                           state.message,
-                          style: Theme.of(context).textTheme.headlineSmall,
+                          style: Theme.of(context).textTheme.headlineMedium,
                           textAlign: TextAlign.center,
                         )
                       else if (state is ExampleError)

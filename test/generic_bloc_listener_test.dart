@@ -47,7 +47,7 @@ void main() {
             LoadingState,
             SuccessState,
             ErrorState
-          >(builder: (state) => const SizedBox(key: testKey)),
+          >(builder: (context, state) => const SizedBox(key: testKey)),
         ),
       ),
     );
@@ -69,8 +69,8 @@ void main() {
             SuccessState,
             ErrorState
           >(
-            onState: (state) => stateCalled = true,
-            builder: (state) => const SizedBox(),
+            onState: (context, state) => stateCalled = true,
+            builder: (context, state) => const SizedBox(),
           ),
         ),
       ),
@@ -93,7 +93,7 @@ void main() {
             LoadingState,
             SuccessState,
             ErrorState
-          >(builder: (state) => const SizedBox()),
+          >(builder: (context, state) => const SizedBox()),
         ),
       ),
     );
@@ -123,7 +123,7 @@ void main() {
             onSuccess: (context, state) {
               successCalled = true;
             },
-            builder: (state) => const SizedBox(),
+            builder: (context, state) => const SizedBox(),
           ),
         ),
       ),
@@ -163,7 +163,7 @@ void main() {
               errorCallbackCalled = true;
               return state.error;
             },
-            builder: (state) => const SizedBox(),
+            builder: (context, state) => const SizedBox(),
           ),
         ),
       ),
@@ -208,7 +208,7 @@ void main() {
               errorCallbackCalled = true;
               return customErrorMessage;
             },
-            builder: (state) => const SizedBox(),
+            builder: (context, state) => const SizedBox(),
           ),
         ),
       ),
@@ -243,7 +243,7 @@ void main() {
         LoadingState,
         LoadingState,
         ErrorState
-      >(builder: (state) => const SizedBox()),
+      >(builder: (context, state) => const SizedBox()),
       throwsA(
         isA<AssertionError>().having(
           (e) => e.toString(),
@@ -272,7 +272,7 @@ void main() {
               LoadingState,
               SuccessState,
               ErrorState
-            >(builder: (state) => const SizedBox()),
+            >(builder: (context, state) => const SizedBox()),
           ),
         ),
       );

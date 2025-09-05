@@ -9,7 +9,7 @@ import 'ui/app_toast.dart';
 class GenericBlocListener<B extends StateStreamable<S>, S, L, Su, F>
     extends StatelessWidget {
   /// The child widget to display.
-  final Widget Function(S state) builder;
+  final Widget Function(BuildContext context, S state) builder;
 
   /// Callback function called when a state is emitted.
   final OnState<S>? onState;
@@ -39,10 +39,10 @@ class GenericBlocListener<B extends StateStreamable<S>, S, L, Su, F>
   Widget build(BuildContext context) {
     return BlocConsumer<B, S>(
       listener: (context, state) {
-        onState?.call(state);
+        onState?.call(context, state);
         _handleState(context, state);
       },
-      builder: (context, state) => builder(state),
+      builder: (context, state) => builder(context, state),
     );
   }
 
