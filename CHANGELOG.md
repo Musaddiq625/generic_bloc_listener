@@ -1,3 +1,6 @@
+## 1.0.4
+* Added screenshot in README.md
+
 ## 1.0.3
 * Added `BuildContext` parameter to `onState` and `builder` callbacks
 * Updated all examples and tests to use the new callback signatures

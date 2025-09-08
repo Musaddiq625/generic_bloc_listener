@@ -12,6 +12,8 @@ A Flutter package that provides a flexible BLoC listener widget with built-in st
 - ❌ Flexible error handling with both state-based and custom error messages
 - 🎨 Fully customizable toast notifications
 
+![Before and after comparison](https://raw.githubusercontent.com/Musaddiq625/generic_bloc_listener/refs/heads/main/screenshots/before_after.jpg)
+
 ## Installation
 
 Add this to your `pubspec.yaml`:
